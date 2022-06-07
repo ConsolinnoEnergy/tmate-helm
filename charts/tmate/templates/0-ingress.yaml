@@ -92,7 +92,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.configMap.hostname }}
-      secretName: {{ .secretName }}-sessions
+      secretName: tmate-sessions-tls
   {{- end }}
   rules:
     - host: {{ .Values.configMap.hostname }}
