@@ -90,17 +90,13 @@ spec:
   {{- end }}
   {{- if .Values.global.ingress.tls }}
   tls:
-    {{- range .Values.global.ingress.tls }}
     - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-        {{- end }}
-      secretName: {{ .secretName }}
-    {{- end }}
+        - {{ .Values.configMap.hostname }}
+      secretName: {{ .secretName }}-sessions
   {{- end }}
   rules:
     {{- range .Values.global.ingress.hosts }}
-    - host: "tmate-sessions"
+    - host: {{ .Values.configMap.hostname }}
       http:
         paths:
           {{- range .paths }}
